@@ -208,7 +208,7 @@ class RapidRoll extends JFrame implements Runnable, KeyListener {
         creator.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(p2, "Name :Abdullah al hasb\nRollno :2006331093\nSub :cse\ninstitute :sust");
+                JOptionPane.showMessageDialog(p2, "Name:khaled saifullah\nRollno :1632664642\nSub :cse\ninstitute :nsu");
             }
         });
 
