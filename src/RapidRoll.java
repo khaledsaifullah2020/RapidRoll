@@ -1,8 +1,16 @@
+package RapidRoll;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 class RapidRoll extends JFrame implements Runnable, KeyListener {
 
@@ -20,6 +28,7 @@ class RapidRoll extends JFrame implements Runnable, KeyListener {
     JCheckBoxMenuItem easy, med, hard;
     ButtonGroup bg;
     ImageIcon ic1, ic2, ic3, iclife, icgameover, icready;
+    File save_score = new File("score.txt");
 
     public void valueassaign() {
         bx1 = 10 + r.nextInt(1);
@@ -57,15 +66,15 @@ class RapidRoll extends JFrame implements Runnable, KeyListener {
         b5 = new JLabel();
         life = new JLabel();
         lb1 = new JLabel();
-        ready = new JLabel("img\\ready");
-        Gameover = new JLabel("img\\GAMEOVER");
+        ready = new JLabel("C:\\Users\\Zephyr IT\\Desktop\\RapidRoll_w_file\\img\\ready");
+        Gameover = new JLabel("C:\\\\Users\\\\Zephyr IT\\\\Desktop\\\\RapidRoll_w_file\\\\img\\GAMEOVER");
 
-        ic1 = new ImageIcon("img\\1.gif");
-        ic2 = new ImageIcon("img\\2.gif");
-        ic3 = new ImageIcon("img\\3.gif");
-        iclife = new ImageIcon("img\\life.gif");
-        icgameover = new ImageIcon("img\\gameover.gif");
-        icready = new ImageIcon("img\\ready.gif");
+        ic1 = new ImageIcon("C:\\\\Users\\\\Zephyr IT\\\\Desktop\\\\RapidRoll_w_file\\\\img\\1.gif");
+        ic2 = new ImageIcon("C:\\\\Users\\\\Zephyr IT\\\\Desktop\\\\RapidRoll_w_file\\\\img\\2.gif");
+        ic3 = new ImageIcon("C:\\\\Users\\\\Zephyr IT\\\\Desktop\\\\RapidRoll_w_file\\\\img\\3.gif");
+        iclife = new ImageIcon("C:\\\\Users\\\\Zephyr IT\\\\Desktop\\\\RapidRoll_w_file\\\\img\\life.gif");
+        icgameover = new ImageIcon("C:\\\\Users\\\\Zephyr IT\\\\Desktop\\\\RapidRoll_w_file\\\\img\\gameover.gif");
+        icready = new ImageIcon("C:\\\\Users\\\\Zephyr IT\\\\Desktop\\\\RapidRoll_w_file\\\\img\\ready.gif");
 
         b1.setIcon(ic1);
         b2.setIcon(ic1);
@@ -142,7 +151,26 @@ class RapidRoll extends JFrame implements Runnable, KeyListener {
         exit.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                
+                FileWriter fw = null;
+                try {
+                    fw = new FileWriter(save_score, true); // creating FileWriter object for 'file'
+                    BufferedWriter buffer = new BufferedWriter(fw);//creating BufferedWriter object for fw
+                    PrintWriter pw = new PrintWriter(buffer);
+                    
+                    pw.println(score);
+                    pw.close();
+                    
+                    System.exit(0);
+                } catch (IOException ex) {
+                    Logger.getLogger(RapidRoll.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    try {
+                        fw.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(RapidRoll.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
         });
 
